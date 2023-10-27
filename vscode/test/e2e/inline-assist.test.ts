@@ -34,6 +34,7 @@ test('start a fixup job from inline chat with valid auth', async ({ page, sideba
     // After opening the comment thread, we need to wait for the editor to load
     await page.waitForSelector('.monaco-editor')
     await page.waitForSelector('.monaco-text-button')
+    await page.click('.comment-form') // Set focus in comment editor.
 
     // Type in the instruction for fixup
     await page.keyboard.type('/edit replace hello with goodbye')

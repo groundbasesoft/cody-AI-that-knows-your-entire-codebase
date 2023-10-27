@@ -75,7 +75,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner: [ubuntu, macos]
+        runner: [ubuntu, windows, macos]
     runs-on: ${{ matrix.runner }}-latest
     timeout-minutes: 15
     permissions:
@@ -111,7 +111,10 @@ jobs:
         if: ${{ failure() }}
         with:
           name: playwright-recordings ${{ matrix.runner }}
-          path: playwright/**/*.webm
+          path: |
+            playwright
+            test-results
+            vscode/test-results
 
   build:
     runs-on: ubuntu-latest
