@@ -92,7 +92,7 @@
     }
   ],
   "engines": {
-    "vscode": "^1.79.0"
+    "vscode": "^1.84.2"
   },
   "main": "./dist/extension.node.js",
   "browser": "./dist/extension.web.js",
@@ -1204,7 +1204,7 @@
     "@types/semver": "^7.5.0",
     "@types/unzipper": "^0.10.7",
     "@types/uuid": "^9.0.2",
-    "@types/vscode": "^1.79.0",
+    "@types/vscode": "^1.80.0",
     "@types/vscode-webview": "^1.57.1",
     "@vscode/test-electron": "^2.3.2",
     "@vscode/test-web": "^0.0.47",
