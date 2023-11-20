@@ -186,8 +186,8 @@ importers:
         specifier: ^0.5.8
         version: 0.5.8
       '@azure/openai':
-        specifier: 1.0.0-beta.5
-        version: 1.0.0-beta.5
+        specifier: 1.0.0-beta.7
+        version: 1.0.0-beta.7
       '@sourcegraph/cody-shared':
         specifier: workspace:*
         version: link:../lib/shared
@@ -590,7 +590,7 @@ packages:
     dependencies:
       '@azure/abort-controller': 1.1.0
       '@azure/core-auth': 1.5.0
-      '@azure/core-rest-pipeline': 1.12.0
+      '@azure/core-rest-pipeline': 1.12.2
       '@azure/core-tracing': 1.0.1
       '@azure/core-util': 1.4.0
       tslib: 2.1.0
@@ -624,9 +624,9 @@ packages:
       tslib: 2.1.0
     dev: false
 
-  /@azure/core-rest-pipeline@1.12.0:
-    resolution: {integrity: sha512-+MnSB0vGZjszSzr5AW8z93/9fkDu2RLtWmAN8gskURq7EW2sSwqy8jZa0V26rjuBVkwhdA3Hw8z3VWoeBUOw+A==}
-    engines: {node: '>=14.0.0'}
+  /@azure/core-rest-pipeline@1.12.2:
+    resolution: {integrity: sha512-wLLJQdL4v1yoqYtEtjKNjf8pJ/G/BqVomAWxcKOR1KbZJyCEnCv04yks7Y1NhJ3JzxbDs307W67uX0JzklFdCg==}
+    engines: {node: '>=16.0.0'}
     dependencies:
       '@azure/abort-controller': 1.1.0
       '@azure/core-auth': 1.5.0
@@ -639,6 +639,13 @@ packages:
       tslib: 2.1.0
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@azure/core-sse@1.0.0:
+    resolution: {integrity: sha512-UhsxgWrQaIh6rJynDCNHYDbJ1b3bmqaOex4so8+h0UL4mxyb/og2FHoDJPzgLlvtM4b6/d/klBpwltsxHaZgNA==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      tslib: 2.1.0
     dev: false
 
   /@azure/core-tracing@1.0.1:
@@ -663,15 +670,18 @@ packages:
       tslib: 2.1.0
     dev: false
 
-  /@azure/openai@1.0.0-beta.5:
-    resolution: {integrity: sha512-Qjb6eXun6OUGwbHMRYtmjojn8wZf5ATGQHFzxPc+/dWFeLdSj5ahs/yWRAgqff3oL6GmgQFhjCPhAnAbVv5Q3w==}
-    engines: {node: '>=14.0.0'}
+  /@azure/openai@1.0.0-beta.7:
+    resolution: {integrity: sha512-LhZXgEGOoDBYyLDnSe5XwkLM5OUC8RppVW1X6+IrmmGnonsaa0POQ2BYr45YAqlpggtATYRVUbmyLi5SxMzhLg==}
+    engines: {node: '>=18.0.0'}
     dependencies:
       '@azure-rest/core-client': 1.1.4
       '@azure/core-auth': 1.5.0
       '@azure/core-lro': 2.5.4
-      '@azure/core-rest-pipeline': 1.12.0
+      '@azure/core-rest-pipeline': 1.12.2
+      '@azure/core-sse': 1.0.0
       '@azure/logger': 1.0.4
+      form-data-encoder: 3.0.1
+      formdata-node: 5.0.1
       tslib: 2.1.0
     transitivePeerDependencies:
       - supports-color
@@ -9571,6 +9581,11 @@ packages:
     resolution: {integrity: sha512-qfqtYan3rxrnCk1VYaA4H+Ms9xdpPqvLZa6xmMgFvhO32x7/3J/ExcTd6qpxM0vH2GdMI+poehyBZvqfMTto8A==}
     dev: false
 
+  /form-data-encoder@3.0.1:
+    resolution: {integrity: sha512-f8HPYqVUtZcpe+eg0xxDXryMxfFMZdNQZVXs3KOY3nSeLUDQBaz3w3UUVXJSgR266pgW4ruwnvV5JR+cJJD6dw==}
+    engines: {node: '>= 16.5'}
+    dev: false
+
   /form-data@2.5.1:
     resolution: {integrity: sha512-m21N3WOmEEURgk6B9GLOE4RuWOFf28Lhh9qGYeNlGq4VDXUlJy2th2slBNU8Gp8EzloYZOibZJ7t5ecIrFSjVA==}
     engines: {node: '>= 0.12'}
@@ -9599,6 +9614,14 @@ packages:
   /formdata-node@4.4.1:
     resolution: {integrity: sha512-0iirZp3uVDjVGt9p49aTaqjk84TrglENEDuqfdlZQ1roC9CWlPk6Avf8EEnZNcAqPonwkG35x4n3ww/1THYAeQ==}
     engines: {node: '>= 12.20'}
+    dependencies:
+      node-domexception: 1.0.0
+      web-streams-polyfill: 4.0.0-beta.3
+    dev: false
+
+  /formdata-node@5.0.1:
+    resolution: {integrity: sha512-8xnIjMYGKPj+rY2BTbAmpqVpi8der/2FT4d9f7J32FlsCpO5EzZPq3C/N56zdv8KweHzVF6TGijsS1JT6r1H2g==}
+    engines: {node: '>= 14.17'}
     dependencies:
       node-domexception: 1.0.0
       web-streams-polyfill: 4.0.0-beta.3
