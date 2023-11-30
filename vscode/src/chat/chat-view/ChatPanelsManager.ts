@@ -18,6 +18,7 @@ import { AuthStatus } from '../protocol'
 
 import { CodyChatPanelViewType } from './ChatManager'
 import { ChatPanelProvider, ChatPanelProviderOptions, ChatViewProviderWebview } from './ChatPanelProvider'
+import { LegacyRecipeAdapter } from './LegacyRecipeAdapter'
 import { SidebarChatOptions } from './SidebarChatProvider'
 import { SimpleChatPanelProvider } from './SimpleChatPanelProvider'
 
@@ -193,6 +194,12 @@ export class ChatPanelsManager implements vscode.Disposable {
                   chatClient: this.chatClient,
                   embeddingsClient: this.embeddingsSearch,
                   localEmbeddings: this.localEmbeddings,
+                  legacyRecipeAdapter: new LegacyRecipeAdapter(
+                      this.options.editor,
+                      this.options.intentDetector,
+                      this.options.contextProvider,
+                      this.options.platform
+                  ),
               })
             : new ChatPanelProvider(this.options)
     }
