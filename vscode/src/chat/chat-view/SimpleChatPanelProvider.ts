@@ -47,9 +47,11 @@ import { ChatHistoryManager } from './ChatHistoryManager'
 import { addWebviewViewHTML, CodyChatPanelViewType } from './ChatManager'
 import { ChatViewProviderWebview } from './ChatPanelProvider'
 import { Config, IChatPanelProvider } from './ChatPanelsManager'
-import { LegacyRecipeAdapter } from './LegacyRecipeAdapter'
 import { DefaultPrompter, IContextProvider, IPrompter } from './prompt'
 import { ContextItem, MessageWithContext, SimpleChatModel, toViewMessage } from './SimpleChatModel'
+import { SimpleChatRecipeAdapter } from './SimpleChatRecipeAdapter'
+
+const defaultChatModel = 'anthropic/claude-2.0'
 
 interface SimpleChatPanelProviderOptions {
     config: Config
@@ -61,14 +63,14 @@ interface SimpleChatPanelProviderOptions {
     localEmbeddings: LocalEmbeddingsController | null
     editor: VSCodeEditor
     treeView: TreeViewProvider
-    legacyRecipeAdapter: LegacyRecipeAdapter
+    recipeAdapter: SimpleChatRecipeAdapter
 }
 
 export class SimpleChatPanelProvider implements vscode.Disposable, IChatPanelProvider {
     public webviewPanel?: vscode.WebviewPanel
     public webview?: ChatViewProviderWebview
 
-    private chatModel: SimpleChatModel = new SimpleChatModel('anthropic/claude-2')
+    private chatModel: SimpleChatModel = new SimpleChatModel(defaultChatModel)
 
     private extensionUri: vscode.Uri
     private disposables: vscode.Disposable[] = []
@@ -92,7 +94,7 @@ export class SimpleChatPanelProvider implements vscode.Disposable, IChatPanelPro
     // as it is necessary to satisfy the IChatPanelProvider interface.
     public sessionID: string
 
-    private legacyRecipeAdapter: LegacyRecipeAdapter
+    private recipeAdapter: SimpleChatRecipeAdapter
 
     constructor({
         config,
@@ -104,7 +106,7 @@ export class SimpleChatPanelProvider implements vscode.Disposable, IChatPanelPro
         localEmbeddings,
         editor,
         treeView,
-        legacyRecipeAdapter,
+        recipeAdapter,
     }: SimpleChatPanelProviderOptions) {
         this.config = config
         this.extensionUri = extensionUri
@@ -116,7 +118,7 @@ export class SimpleChatPanelProvider implements vscode.Disposable, IChatPanelPro
         this.treeView = treeView
         this.sessionID = this.chatModel.sessionID
         this.guardrails = guardrails
-        this.legacyRecipeAdapter = legacyRecipeAdapter
+        this.recipeAdapter = recipeAdapter
 
         // Advise local embeddings to start up if necessary.
         void this.localEmbeddings?.start()
@@ -688,7 +690,7 @@ export class SimpleChatPanelProvider implements vscode.Disposable, IChatPanelPro
     ): Promise<void> {
         try {
             const requestID = uuid.v4()
-            const recipeMessages = await this.legacyRecipeAdapter.computeRecipeMessages(
+            const recipeMessages = await this.recipeAdapter.computeRecipeMessages(
                 requestID,
                 recipeID,
                 humanChatInput,
@@ -1024,7 +1026,7 @@ async function newChatModelfromTranscriptJSON(editor: Editor, json: TranscriptJS
             ]
         }
     )
-    return new SimpleChatModel(json.chatModel || 'anthropic/claude-2', (await Promise.all(messages)).flat(), json.id)
+    return new SimpleChatModel(json.chatModel || defaultChatModel, (await Promise.all(messages)).flat(), json.id)
 }
 
 export function deserializedContextFilesToContextItems(
