@@ -395,8 +395,8 @@ importers:
         specifier: ^0.0.35
         version: 0.0.35
       '@vscode/webview-ui-toolkit':
-        specifier: ^1.2.2
-        version: 1.2.2(react@18.2.0)
+        specifier: ^1.3.1
+        version: 1.3.1(react@18.2.0)
       async-mutex:
         specifier: ^0.4.0
         version: 0.4.0
@@ -7022,8 +7022,8 @@ packages:
       keytar: 7.9.0
     dev: true
 
-  /@vscode/webview-ui-toolkit@1.2.2(react@18.2.0):
-    resolution: {integrity: sha512-xIQoF4FC3Xh6d7KNKIoIezSiFWYFuf6gQMdDyKueKBFGeKwaHWEn+dY2g3makvvEsNMEDji/woEwvg9QSbuUsw==}
+  /@vscode/webview-ui-toolkit@1.3.1(react@18.2.0):
+    resolution: {integrity: sha512-vrP45vHytXGl3EeBBkgZFsl70w1FQaPNG/Z3YXbm3ee+4/+WK1F2StFgtpFPYxUYxZFogtR3CmHNW4pb5DjLrw==}
     peerDependencies:
       react: '>=16.9.0'
     dependencies:
